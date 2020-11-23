@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
@@ -47,7 +47,9 @@ namespace IdentityServer4.EntityFramework.Extensions
                 client.Property(x => x.UserCodeType).HasMaxLength(100);
                 client.Property(x => x.AllowedIdentityTokenSigningAlgorithms).HasMaxLength(100);
 
-                client.HasIndex(x => x.ClientId).IsUnique();
+                client.Property(x => x.TenantId).HasMaxLength(450).IsRequired();
+
+                client.HasIndex(x => new { x.ClientId, x.TenantId }).IsUnique();
 
                 client.HasMany(x => x.AllowedGrantTypes).WithOne(x => x.Client).HasForeignKey(x=>x.ClientId).IsRequired().OnDelete(DeleteBehavior.Cascade);
                 client.HasMany(x => x.RedirectUris).WithOne(x => x.Client).HasForeignKey(x => x.ClientId).IsRequired().OnDelete(DeleteBehavior.Cascade);
@@ -190,7 +192,7 @@ namespace IdentityServer4.EntityFramework.Extensions
                 identityResource.Property(x => x.DisplayName).HasMaxLength(200);
                 identityResource.Property(x => x.Description).HasMaxLength(1000);
 
-                identityResource.HasIndex(x => x.Name).IsUnique();
+                identityResource.HasIndex(x => new { x.Name, x.TenantId}).IsUnique();
 
                 identityResource.HasMany(x => x.UserClaims).WithOne(x => x.IdentityResource).HasForeignKey(x => x.IdentityResourceId).IsRequired().OnDelete(DeleteBehavior.Cascade);
                 identityResource.HasMany(x => x.Properties).WithOne(x => x.IdentityResource).HasForeignKey(x => x.IdentityResourceId).IsRequired().OnDelete(DeleteBehavior.Cascade);
@@ -221,7 +223,7 @@ namespace IdentityServer4.EntityFramework.Extensions
                 apiResource.Property(x => x.Description).HasMaxLength(1000);
                 apiResource.Property(x => x.AllowedAccessTokenSigningAlgorithms).HasMaxLength(100);
 
-                apiResource.HasIndex(x => x.Name).IsUnique();
+                apiResource.HasIndex(x => new { x.Name, x.TenantId }).IsUnique();
 
                 apiResource.HasMany(x => x.Secrets).WithOne(x => x.ApiResource).HasForeignKey(x => x.ApiResourceId).IsRequired().OnDelete(DeleteBehavior.Cascade);
                 apiResource.HasMany(x => x.Scopes).WithOne(x => x.ApiResource).HasForeignKey(x => x.ApiResourceId).IsRequired().OnDelete(DeleteBehavior.Cascade);

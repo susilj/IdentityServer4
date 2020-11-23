@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetIdentity\src\IdentityServer4.AspNetIdentity.csproj" />
+    <ProjectReference Include="..\EntityFramework.Storage\src\IdentityServer4.EntityFramework.Storage.csproj" />
+    <ProjectReference Include="..\EntityFramework\src\IdentityServer4.EntityFramework.csproj" />
+    <ProjectReference Include="..\IdentityServer4.AspNetIdentity.EntityFramework\IdentityServer4.AspNetIdentity.EntityFramework.csproj" />
+    <ProjectReference Include="..\IdentityServer4\src\IdentityServer4.csproj" />
+    <ProjectReference Include="..\Storage\src\IdentityServer4.Storage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\AspNetIdentity\ApplicationDb\" />
+    <Folder Include="Data\Migrations\IdentityServer\ConfigurationDb\" />
+    <Folder Include="Data\Migrations\IdentityServer\PersistedGrantDb\" />
+  </ItemGroup>
+
+</Project>

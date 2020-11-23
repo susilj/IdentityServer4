@@ -66,5 +66,10 @@ namespace IdentityServer4.Models
         /// Use this setting for sensitive or important scopes. Defaults to false.
         /// </summary>
         public bool Emphasize { get; set; } = false;
+
+        /// <summary>
+        /// Specifies the tenant
+        /// </summary>
+        public string TenantName { get; set; }
     }
 }
