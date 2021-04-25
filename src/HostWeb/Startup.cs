@@ -115,6 +115,9 @@ namespace HostWeb
         {
             using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
+                AspNetIdentityDbContext aspNetIdentityDbContext = serviceScope.ServiceProvider.GetRequiredService<AspNetIdentityDbContext>();
+                aspNetIdentityDbContext.Database.Migrate();
+
                 PersistedGrantDbContext persistedGrantDbContext = serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>();
                 persistedGrantDbContext.Database.Migrate();
 

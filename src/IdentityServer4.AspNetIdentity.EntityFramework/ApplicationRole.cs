@@ -8,6 +8,5 @@ namespace IdentityServer4.AspNetIdentity.EntityFramework
         public string TenantId { get; set; }
 
         public virtual Tenant Tenant { get; set; }
-        IdentityRole
     }
 }
